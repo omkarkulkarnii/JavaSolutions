@@ -234,7 +234,9 @@ public class MatheMatics {
         System.out.println("is the year leap yr or not "+LeapOrNot(2004));
         System.out.println("sum of digits of given number is "+ AddAllDigits(1230456));
         System.out.println("reversed number is "+reverseNumber(12345)[0] + " and the count of digits is " +reverseNumber(12345)[1] );
-
+        System.out.println("is the number palindrome? : " + isPalisArms(12321)[0] + " and is the number armstrong number? : " + isPalisArms(371)[1] );
+        System.out.println("is 1313 prime? " +isPrime(1313));
+        System.out.println("gcd using euclidean's algorithm is " + gcd(12,7));
 
 
     }
