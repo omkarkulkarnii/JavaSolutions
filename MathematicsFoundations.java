@@ -1,15 +1,16 @@
 import java.math.BigInteger;
 import java.security.spec.RSAOtherPrimeInfo;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MatheMatics {
     public static BigInteger factorial(BigInteger a){
-        if(a.equals(BigInteger.ZERO) || a.equals(BigInteger.ONE)){
-            return BigInteger.ONE;
-        }
-        else{
-            return a.multiply(factorial(a.subtract(BigInteger.ONE)));
-        }
+    if(a.equals(BigInteger.ZERO) || a.equals(BigInteger.ONE)){
+        return BigInteger.ONE;
+    }
+    else{
+        return a.multiply(factorial(a.subtract(BigInteger.ONE)));
+    }
     }
     public static String oddEven(int[] a){
         String ans = "";
@@ -135,7 +136,68 @@ public class MatheMatics {
         }
         return ans;
     }
+    public static boolean[] isPalisArms(int n){
+        boolean pal = false;
+        boolean arms = false;
+        int og = n;
+        int rev = 0;
+        ArrayList<Integer> lg = new ArrayList<>();
+        while(n > 0){
+            int lastdg = n % 10;
+            lg.add(lastdg);
+            rev = (rev*10) + lastdg;
+            n = n /10;
+        }
+        if(rev == og)
+            pal = true;
+        int sumForArms = 0;
+        for(int i : lg){
+            sumForArms = sumForArms + ( i * i * i);
+        }
+        if(sumForArms == og)
+            arms = true;
 
+        boolean[] answers = new boolean[]{pal, arms};
+        return answers;
+    }
+    public static int[] reverseNumber(int m){
+        //1234
+
+    int ans = 0;
+    int count = 0;
+    while(m > 0){
+        int  lastdigit= m%10; //4
+        m = m/10;
+        ans =(ans*10) + lastdigit ; // 0 * 10 + 4 = 4
+        count++;
+    }
+    int[] answers = new int[]{ans, count};
+    return answers;
+}
+    public static boolean isPrime(int n){
+        //n=12;
+        boolean ans = false;
+        int count = 0;
+        for(int i = 1; i*i <= n;){      //  y, y, y,
+            if((n % i) == 0){           //  y, y, n,
+                count++;                //  c1, c3
+                if((n/i) != i ){        //  12/1 = 12 y, 12/2 = 6 y
+                    count++;            //  c2, c4
+                }                       //
+            }
+            i++;                        // 1..,2..,3..,4
+        }
+        if(count == 2) ans = true;
+        return ans;
+    }
+    public static int gcd(int a, int b){
+        while(a > 0 && b > 0){
+            if(a > b) a= a % b ;
+            if( b > a) b = b % a;
+        }
+        if(a == 0) return b;
+        return a;
+    }
 
 
     public static void main(String args[]){
@@ -171,6 +233,8 @@ public class MatheMatics {
         System.out.println("sum Of N In Given Range"+sumOfNInGivenRange(5, 5));
         System.out.println("is the year leap yr or not "+LeapOrNot(2004));
         System.out.println("sum of digits of given number is "+ AddAllDigits(1230456));
+        System.out.println("reversed number is "+reverseNumber(12345)[0] + " and the count of digits is " +reverseNumber(12345)[1] );
+
 
 
     }
