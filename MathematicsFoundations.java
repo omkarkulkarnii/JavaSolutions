@@ -1,4 +1,5 @@
 import java.math.BigInteger;
+import java.nio.charset.Charset;
 import java.security.spec.RSAOtherPrimeInfo;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -198,7 +199,64 @@ public class MatheMatics {
         if(a == 0) return b;
         return a;
     }
+    public static int fiboOfN(int n){
+        if(n == 0 || n == 1) return n;
+        int a = 0 ;
+        int b = 1;
+        int c  = 0;
+        for(int i = 2; i<= n ; i++){
+            c = a + b;
+            a = b;
+            b = c;
+        }
+        return c;
+    }
+    public static String decToBin(int n){
 
+        return Integer.toBinaryString(n);
+
+    }
+    public static String decToBinHardCoded( int n ){
+        if(n == 0 ) return "0";
+        if( n == 1) return "1";
+        String ans = "";
+        while(n > 0){
+            if( (n & 1)==1)  ans = "1" + ans;
+            if( (n&1)== 0) ans = "0" + ans;
+           n = n >> 1;
+        }
+        return ans;
+    }
+    public static String ZeroAndOnes(String bin) {
+        //bin 11101101
+        String ans = "";
+        char[] arr = bin.toCharArray();
+        int count = 0;
+        for (char a : arr) {
+            if (a == '1') {
+                count++;
+            }
+            if (a == '0') {
+               ans= ans+ alphabetDig(count);
+               count = 0;
+            }
+        }
+    if(count > 0) ans = ans+ alphabetDig(count);
+    return ans;
+    }
+    public static char alphabetDig(int a){
+
+        return (char) ('A' +  a -1);
+
+    }
+    public static boolean isGooglyPrime(int num){
+        int sum = 0;
+        while(num > 0){
+            sum = sum +( num % 10 );
+            num = num / 10;
+        }
+        return isPrime(sum);
+    }
 
     public static void main(String args[]){
 
@@ -237,7 +295,12 @@ public class MatheMatics {
         System.out.println("is the number palindrome? : " + isPalisArms(12321)[0] + " and is the number armstrong number? : " + isPalisArms(371)[1] );
         System.out.println("is 1313 prime? " +isPrime(1313));
         System.out.println("gcd using euclidean's algorithm is " + gcd(12,7));
-
+        System.out.println("fibonacci seires of nth numer is : " + fiboOfN(9));
+        System.out.println("binary form of n is : " + decToBin(54));
+        System.out.println("binary form of n in hard coded is  : " + decToBinHardCoded(54));
+        System.out.println("digit number of alphabet is : " + alphabetDig(8));
+        System.out.println("digit number of alphabet is : " + ZeroAndOnes("1101011111111"));
+        System.out.println("is the sum off digits a prime number" +isGooglyPrime(43));
 
     }
 }
